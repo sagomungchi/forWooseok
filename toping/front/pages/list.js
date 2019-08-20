@@ -10,6 +10,7 @@
 *
 * */
 
+
 import axios from 'axios';
 import { Row, Col } from 'antd';
 import Link from 'next/link';
@@ -19,69 +20,84 @@ const mainListStyle = {
     width: "300px",
     height: "250px"
 }
+class _List extends React.Component {
 
-class List extends React.Component {
+    state = {
 
-    static async getInitialProps({ req }) {
-        const response = await axios.get('http://localhost:5000/post')
-        return {
-            posts: response.data
-        }
     }
 
-    render() {
-       const {posts} = this.props;
+    componentDidMount() {
+        this._getPosts();
+    }
 
-       console.log({posts});
+    _renderPosts = () => {
 
         function formatNum(num) {
             return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
         }
 
-        let a = [1,2,3,4,5];
-        let t = a.map(e=>{e= e+1})
-        console.log(a.map(e=>{e*e}));
+        const userList = this.state.posts.map(post => {
+            console.log(post)
+            return(
+            <>
+                <li key={post.id} style={{ listStyleType: "none" }}>
 
-        // const userList = posts.map(
-        //     post =>{
-        //         <li key={post.id} style={{listStyleType: "none"}}>
+                    <Row gutter={30}>
+                        <Col style={{ marginTop: 20, textAlign: "right" }} md={8}>
+                            <Link as={post.title} href={{
+                                pathname: '/Post',
+                                query: { postImg: post.img, postTitle: post.title, postText: post.text }
+                            }}>
+                                <img src={post.img} style={mainListStyle} />
+                            </Link>
+                        </Col>
+                        <Col style={{ marginTop: 20, textAlign: "left" }} md={16}>
+                            <Row>
+                                <h1>{post.title}</h1> - {post.team}
+                            </Row>
+                            <Row>
+                                {post.text}
+                            </Row>
+                            <Row>
+                                투자현황
+                                <br />
+                                <h2>{formatNum(post.earnMoney)}/{formatNum(post.needMoney)}</h2><h4
+                                    style={{}}>({(post.earnMoney / post.needMoney * 100).toFixed(1)}%)</h4>
+                                <h1>{post.track}</h1>
+                            </Row>
+                        </Col>
+                    </Row>
+                </li>
+            </>
+            )
+        })
 
-        //             <Row gutter={30}>
-        //                 <Col style={{marginTop:20,textAlign:"right"}} md={8}>
-        //                     <Link as={post.title} href={{
-        //                         pathname: '/Post',
-        //                         query: {postImg: post.img, postTitle: post.title, postText: post.text}
-        //                     }}>
-        //                         <img src={post.img} style={mainListStyle}/>
-        //                     </Link>
-        //                 </Col>
-        //                 <Col style={{marginTop:20,textAlign:"left"}} md={16}>
-        //                     <Row>
-        //                         <h1>{post.title}</h1> - {post.team}
-        //                     </Row>
-        //                     <Row>
-        //                         {post.text}
-        //                     </Row>
-        //                     <Row>
-        //                         투자현황
-        //                         <br/>
-        //                         <h2>{formatNum(post.earnMoney)}/{formatNum(post.needMoney)}</h2><h4
-        //                         style={{}}>({(post.earnMoney/post.needMoney*100).toFixed(1)}%)</h4>
-        //                         <h1>{post.track}</h1>
-        //                     </Row>
-        //                 </Col>
-        //             </Row>
-        //         </li>
-        //     }
-        // )
+        return userList
+    }
 
-        
+    _getPosts = async () => {
+        const posts = await this._callApi();
+        this.setState({
+            posts
+        })
+    }
+
+    _callApi = () => {
+        return (
+            axios.get('http://localhost:5000/post')
+                .then(response => response.data)
+                .catch(err => console.log(err))
+        )
+    }
+
+
+    render() {
         return (
             <>
-                aa
+             {this.state.posts ? this._renderPosts() : 'Loding'}
             </>
         );
     }
 }
 
-export default List
+export default _List

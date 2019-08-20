@@ -1,18 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
-import { Col } from 'antd';
+import { Col, Row, Icon } from 'antd';
 
-const Nav_loginfalse =()=>{
+const Nav_loginfalse = () => {
     return (
         <>
-            <Col xs={3} md={3}>
-                <Link href="login">
-                    <div>로그인</div>
-                </Link>
-            </Col>
-            < Col xs={3} md={3}>
-                <Link href="join"><div>회원가입</div></Link>
-            </Col>
+                <Col xs={4} md={4} >
+                    <Link href="login">
+                        <a>Login</a>
+                    </Link>
+                    /
+                    <Link  href="join">
+                        <a>Join <Icon type="user" /></a>
+                    </Link>
+                </Col>
+                
         </>
     )
 }

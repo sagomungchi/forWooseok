@@ -17,6 +17,16 @@
       "needMoney": "3000000",
       "track": "사업화트랙 요약",
       "id": 1
+    },
+    {
+      "earnMoney": 350000,
+      "team": "사고뭉치2",
+      "title": "toping2",
+      "text": "토핑은 만들기가 어려워요2",
+      "img": "../static/TopiLogo2",
+      "needMoney": "30000002",
+      "track": "사업화트랙 요약2",
+      "id": 2
     }
   ],
   "u300": [

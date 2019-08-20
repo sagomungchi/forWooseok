@@ -4,24 +4,56 @@
 *
 *
 * */
-import {Row, Col} from "antd";
+import { Row, Col, Carousel } from "antd";
 
-const AdForm=()=>{
-    return(
-        <Row>
-            <Col style={{marginTop:"60px",textAlign:"right"}} xs={12} md={12}>
-                <img style={{width:"700px", height:"400px"}} src="static/TopiLogo.png"/>
-            </Col>
-            <Col style={{marginTop:"60px", marginLeft:"20px",textAlign:"left"}} xs={12} md={10}>
-                <Row>
-                    <h1 style={{fontSize:"40px"}}>토핑</h1>
-                </Row>
-                <Row>
-                    <h2>토핑은 ...입니다</h2>
-                </Row>
-            </Col>
+const AdFormStyle = {
+    marginRight: "20%",
+    marginLeft: "20%",
+    height : "400px",
+    width : "90%",
+    margin : "0px auto",
 
-        </Row>
+}
+
+const AdForm = () => {
+    return (
+        <Carousel class autoplay>
+            <div>
+                <Col xs={24} md={24}>
+                    <img style={AdFormStyle} src="static/adone.png" />
+                </Col>
+            </div>
+            <div>
+
+                <Col xs={24} md={24}>
+                    <img style={AdFormStyle} src="static/adq.png" />
+                </Col>
+            </div>
+
+            <div>
+                <Col xs={24} md={24}>
+                    <img style={AdFormStyle} src="static/adqq.png" />
+                </Col>
+            </div>
+
+            <div>
+                <Col xs={24} md={24}>
+                    <img style={AdFormStyle} src="static/adqqq.png" />
+                </Col>
+            </div>
+
+            <div>
+                <Col xs={24} md={24}>
+                    <img style={AdFormStyle} src="static/adqqqq.png" />
+                </Col>
+            </div>
+
+            <div>
+                <Col xs={24} md={24}>
+                    <img style={AdFormStyle} src="static/adqqqqq.png" />
+                </Col>
+            </div>
+        </Carousel>
     )
 }
 
