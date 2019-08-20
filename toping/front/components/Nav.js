@@ -21,12 +21,15 @@ const NavStyle = {
     top : "50%",
     padding : "5px",
     borderBottom : "1px solid",
-    
 }
 
 const imgStyle = {
-    width : "20%",
+    width : "25%",
+    marginBottom : "10px",
+}
 
+const textStyle = {
+    fontWeight : "bold"
 }
 
 
@@ -36,19 +39,21 @@ const Navigator = ({ children }) => {
             <Head>
                 <title>toping</title>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.21.2/antd.css" />
+        
             </Head>
+            <div  style={textStyle}>
             <Row style={NavStyle} >
                 <Col xs={4} md={4}>
-                    <Link href="list" >List</Link>
+                    <Link href="list" ><div>List</div></Link>
                 </Col>
                 <Col xs={4} md={4}>
-                    <Link href="addIdea">Register</Link>
+                    <Link href="addIdea"><div>Register</div></Link>
                 </Col>
                 <Col xs={8} md={8} style={{ marginTop: "-15px", fontSize: "40px" }}>
                     <Link href="index" ><a><img style={imgStyle} src="static/toping.png"/></a></Link>
                 </Col>
                 <Col xs={4} md={4}>
-                    <Link href="simulatedInvestment">Invest</Link>
+                    <Link href="simulatedInvestment"><div>Invest</div></Link>
                 </Col>
                 {isLoggedIn
                     ?
@@ -57,6 +62,7 @@ const Navigator = ({ children }) => {
                     <Nav_loginfalse />
                 }
             </Row>
+            </div>
             {children}
         </>
     )

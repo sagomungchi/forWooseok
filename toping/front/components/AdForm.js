@@ -4,7 +4,7 @@
 *
 *
 * */
-import { Row, Col, Carousel } from "antd";
+import { Col, Carousel } from "antd";
 
 const AdFormStyle = {
     marginRight: "20%",
@@ -12,7 +12,6 @@ const AdFormStyle = {
     height : "400px",
     width : "90%",
     margin : "0px auto",
-
 }
 
 const AdForm = () => {

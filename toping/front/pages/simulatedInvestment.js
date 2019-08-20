@@ -10,7 +10,7 @@
 * */
 
 import axios from 'axios';
-import {Row, Col} from 'antd';
+import { Row, Col } from 'antd';
 import Link from 'next/link';
 import React from 'react';
 
@@ -20,57 +20,80 @@ const mainListStyle = {
 }
 
 class List extends React.Component {
-   
-    static async getInitialProps({req}) {
-        const response = await axios.get('http://localhost:5000/u300')
-        return {
-            posts: response.data
-        }
+
+    state = {
+
     }
 
-    render() {
-        const {posts} = this.props;
+    componentDidMount() {
+        this._getPosts();
+    }
 
-        function formatNum(num){
-            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1,');
+
+    _renderPosts = () => {
+        function formatNum(num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
         }
 
-        const userList = posts.map(
+        const userList = this.state.posts.map(
+
             post =>
-                <li key={post.id} style={{listStyleType: "none"}}>
+                <div style={{ marginLeft:"20%", marginRight:"20%" }}>
+                    <li key={post.id} style={{ listStyleType: "none" }}>
 
-                    <Row gutter={30}>
-                        <Col style={{marginTop:20,textAlign:"right"}} md={8}>
-                            <Link as={post.title} href={{
-                                pathname: '/EventPost',
-                                query: {postImg: post.img, postTitle: post.title, postText: post.text}
-                            }}>
-                                <img src={post.img} style={mainListStyle}/>
-                            </Link>
-                        </Col>
-                        <Col style={{marginTop:20,textAlign:"left"}} md={16}>
-                            <Row>
-                                <h1>{post.title}</h1> - {post.team}
-                            </Row>
-                            <Row>
-                                {post.text}
-                            </Row>
-                            <Row>
-                                투자현황
-                                <br/>
-                                <h2>{formatNum(post.earnMoney)}</h2>
+                        <Row gutter={30}>
+                            <Col style={{ marginTop: 20, textAlign: "right" }} md={8}>
+                                <Link as={post.title} href={{
+                                    pathname: '/EventPost',
+                                    query: { postImg: post.img, postTitle: post.title, postText: post.text }
+                                }}>
+                                    <img src={post.img} style={mainListStyle} />
+                                </Link>
+                            </Col>
+                            <Col style={{ marginTop: 20, textAlign: "left" }} md={16}>
+                                <Row>
+                                    <h1>{post.title}</h1> - {post.team}
+                                </Row>
+                                <Row>
+                                    {post.text}
+                                </Row>
+                                <Row>
+                                    투자현황
+                                <br />
+                                    <h2>{formatNum(post.earnMoney)}</h2>
 
-                            </Row>
-                        </Col>
-                    </Row>
-                </li>
+                                </Row>
+                            </Col>
+                        </Row>
+                    </li>
+                </div>
         )
+        return userList
+    }
+
+    _getPosts = async () => {
+        const posts = await this._callApi();
+        this.setState({
+            posts
+        })
+    }
+
+    _callApi = () => {
+        return (
+            axios.get('http://localhost:5000/u300')
+                .then(response => response.data)
+                .catch(err => console.log(err))
+        )
+    }
+
+
+    render() {
+
         return (
             <>
-                <ul>
-           
-                    {userList}
-                </ul>
+                <>
+                    {this.state.posts ? this._renderPosts() : 'Loding'}
+                </>
             </>
         );
     }

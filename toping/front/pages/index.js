@@ -1,11 +1,12 @@
-import Navigator from '../components/Nav';
+
 import AdForm from "../components/AdForm";
-import MainList from "../components/MainList";
+import Rank from "../components/Rank";
 
 const index = () => {
     return (
         <>
             <AdForm />
+            <Rank />
         </>
     )
 }

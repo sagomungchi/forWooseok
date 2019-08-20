@@ -1,20 +1,22 @@
 import React from 'react';
 import Link from 'next/link';
-import { Col, Row, Icon } from 'antd';
+import { Col, Icon } from 'antd';
 
 const Nav_loginfalse = () => {
     return (
         <>
-                <Col xs={4} md={4} >
-                    <Link href="login">
-                        <a>Login</a>
-                    </Link>
-                    /
-                    <Link  href="join">
-                        <a>Join <Icon type="user" /></a>
-                    </Link>
-                </Col>
-                
+            <Col xs={2} md={2} >
+                <Link href="login">
+                    <div>Login /</div>
+                </Link>
+            </Col>
+            <Col xs={2} md={2}  >
+
+                <Link href="join">
+                    <div style={{paddingRight:"30px"}}>Join<Icon type="user" /></div>
+                </Link>
+            </Col>
+
         </>
     )
 }

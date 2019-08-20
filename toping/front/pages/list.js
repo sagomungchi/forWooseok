@@ -40,8 +40,8 @@ class _List extends React.Component {
             console.log(post)
             return(
             <>
+            <div style={{ marginLeft:"20%", marginRight:"20%" }}>
                 <li key={post.id} style={{ listStyleType: "none" }}>
-
                     <Row gutter={30}>
                         <Col style={{ marginTop: 20, textAlign: "right" }} md={8}>
                             <Link as={post.title} href={{
@@ -68,6 +68,7 @@ class _List extends React.Component {
                         </Col>
                     </Row>
                 </li>
+             </div>
             </>
             )
         })
