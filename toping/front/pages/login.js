@@ -5,9 +5,10 @@
 * json 왔다갔다는 example 폴더안에 example login 참조
 * 
 * */
-import Navigator from '../components/Nav'
+
 import React, {useState} from 'react'
 import {Form, Button, Input, Checkbox} from 'antd';
+
 const Login = () => {
     const [id, setId] = useState('');
     const [PN, setPN] = useState('');
@@ -33,7 +34,6 @@ const Login = () => {
     };
 
     return (
-        <Navigator>
             <Form onSubmit={onSubmit} style={{textAlign:"center",marginTop:"30px",marginLeft:-60,padding: 10}}>
                 <div>
                     <label htmlFor="user-id" >아이디</label>
@@ -50,7 +50,7 @@ const Login = () => {
                 <div>
                     <label htmlFor="user-PN-chk">휴대폰번호 체크</label>
                     <br/>
-                    <Input name="user-ㅖㅜ-chk" value={PNCheck} required
+                    <Input name="user-PN-chk" value={PNCheck} required
                            onChange={onChangePNCheck} style={{width: 200}}/>
                 </div>
                 <div>
@@ -61,7 +61,6 @@ const Login = () => {
                     <Button type="primary" htmlType="submit">로그인!</Button>
                 </div>
             </Form>
-        </Navigator>
 
     );
 };

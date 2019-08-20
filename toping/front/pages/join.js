@@ -2,7 +2,7 @@
 * 필요없겠지만 회원가입 페이지
 * 
 * */
-import Navigator from '../components/Nav'
+
 import React, {useState} from 'react'
 import {Form, Button, Input, Checkbox} from 'antd';
 const Join = () => {
@@ -51,7 +51,6 @@ const Join = () => {
     };
 
     return (
-        <Navigator>
             <Form onSubmit={onSubmit} style={{textAlign:"center",marginTop:"30px",marginLeft:-60,padding: 10}}>
                 <div>
                     <label htmlFor="user-id" >아이디</label>
@@ -84,8 +83,6 @@ const Join = () => {
                     <Button type="primary" htmlType="submit">가입하기</Button>
                 </div>
             </Form>
-        </Navigator>
-
     );
 };
 export default Join;

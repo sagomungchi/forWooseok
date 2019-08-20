@@ -9,21 +9,25 @@
 *
 * */
 
-import Navigator from "../components/nav"
 import axios from 'axios';
 import {Row, Col} from 'antd';
 import Link from 'next/link';
+import React from 'react';
+
 const mainListStyle = {
     width: "300px",
     height: "250px"
 }
+
 class List extends React.Component {
+   
     static async getInitialProps({req}) {
         const response = await axios.get('http://localhost:5000/u300')
         return {
             posts: response.data
         }
     }
+
     render() {
         const {posts} = this.props;
 
@@ -62,11 +66,12 @@ class List extends React.Component {
                 </li>
         )
         return (
-            <Navigator>
+            <>
                 <ul>
+           
                     {userList}
                 </ul>
-            </Navigator>
+            </>
         );
     }
 }

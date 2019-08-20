@@ -1,14 +1,12 @@
-import Navigator from '../components/Nav'
+import Navigator from '../components/Nav';
 import AdForm from "../components/AdForm";
 import MainList from "../components/MainList";
 
 const index = () => {
     return (
-        <Navigator>
-            <AdForm></AdForm>
-            <MainList/>
-        </Navigator>
-
+        <>
+            <div>안녕하세요</div>
+        </>
     )
 }
 export default index

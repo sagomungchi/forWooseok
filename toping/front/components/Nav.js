@@ -1,6 +1,9 @@
 import {Row,Button, Col} from "antd";
 import Link from 'next/link';
 import Head from 'next/head';
+import React from 'react';
+import Nav_loginfalse from '../components/Nav_loginfalse';
+import Nav_logintrue from '../components/Nav_logintrue';
 
 /*
 * Navigator 모든페이지 상단에 출력
@@ -24,7 +27,6 @@ const Navigator = ({children}) => {
             </Head>
             <Row style={NavStyle}>
                 <Col xs={4} md={4}>
-
                     <Link href="list"><div>아이디어 리스트</div></Link>
                 </Col>
                 <Col xs={4} md={4}>
@@ -38,33 +40,13 @@ const Navigator = ({children}) => {
                 </Col>
                 {isLoggedIn
                     ?
-                    <>
-                    <Col style={{marginTop:-10}} xs={3} md={1}>
-                            <div style={{fontSize:15}}>안녕하세요 이상수님!</div>
-                    </Col>
-                    < Col style={{marginTop:-10}} xs={3} md={3}>
-                        <Row style={{fontSize:15}}>보유금액 : 3000000</Row>
-                        <Button>로그아웃</Button>
-                    </Col>
-                    </>
+                    <Nav_logintrue />
                     :
-                    <>
-                        <Col xs={3} md={3}>
-                            <Link href="login">
-                                <div>로그인</div>
-                            </Link>
-                        </Col>
-                        < Col xs={3} md={3}>
-                            <Link href="join"><div>회원가입</div></Link>
-                        </Col>
-                    </>
+                    <Nav_loginfalse />
                 }
             </Row>
             {children}
         </>
-
-
-
     )
 
 }
