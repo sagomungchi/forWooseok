@@ -37,11 +37,10 @@ class List extends React.Component {
         }
 
         const userList = this.state.posts.map(post => {
-            console.log(post)
             return (
                 <>
                     <div style={{ marginLeft: "20%", marginRight: "20%" }}>
-                        <Col span={8} style={{ marginBottom: '30px' }}><SimInvestment _title={post.title} _id={post.id} _img={post.img} _team={post.team} _text={post.text} /></Col>
+                        <Col span={8} style={{ marginBottom: '30px' }}><SimInvestment _captainName={post.captainName} _id={post.id} _imgSource={post.imgSource} _itemIntro={post.itemIntro} _itemName={post.itemName} _organization={post.organization} _teamCnt={post.teamCnt} _teamName={post.teamName}/></Col>
                     </div>
                 </>
             )
@@ -58,7 +57,7 @@ class List extends React.Component {
 
     _callApi = () => {
         return (
-            axios.get('http://localhost:5000/u300')
+            axios.get('http://sagomungchi.iptime.org/api/posts')
                 .then(response => response.data)
                 .catch(err => console.log(err))
         )

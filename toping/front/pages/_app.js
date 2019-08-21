@@ -2,6 +2,7 @@ import Navigator from '../components/Nav';
 import React from 'react';
 
 const Home = ({ Component }) => {
+    
     return (
         <>
             <Navigator>
