@@ -2,6 +2,8 @@
 import AdForm from "../components/AdForm";
 import Rank from "../components/Rank";
 import { Table } from 'antd';
+import React from 'react';
+import axios from 'axios';
 
 const dataSource = [
     {
@@ -38,8 +40,41 @@ const dataSource = [
     },
   ];
 
+/* 위는 더미 데이터 */
 
-const index = () => {
+
+
+class index extends React.Component {
+
+  state = {
+
+  }
+
+  componentDidMount() {
+      this._getRanks();
+  }
+
+  _renderRanks = () =>{
+
+  }
+
+  _getRanks = async () =>{
+    const ranks = await this._callApi();
+        this.setState({
+            ranks
+        })
+  }
+
+  _callApi = () => {
+    return (
+        axios.get('http://localhost:5000/post')
+            .then(response => response.data)
+            .catch(err => console.log(err))
+    )
+}
+
+
+  render(){
     return (
         <>
             <AdForm />
@@ -49,5 +84,8 @@ const index = () => {
             </div>
         </>
     )
+  }
+
+
 }
 export default index
