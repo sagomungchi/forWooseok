@@ -1,67 +1,108 @@
-/*
-* 로그인페이지 간략
-* 아이디, 휴대폰번호만 입력하게
-* 휴대폰 번호는 휴대폰 번호 두개 불일치시 submit 안되는 조건만 걸어놓음
-* json 왔다갔다는 example 폴더안에 example login 참조
-* 
-* */
+import React, { Component } from 'react';
+import { login } from '../pages/util/APIUtils';
+import Link from 'next/link';
+import { ACCESS_TOKEN } from '../pages/constants/index';
 
-import React, {useState} from 'react'
-import {Form, Button, Input, Checkbox} from 'antd';
+import { Form, Input, Button, Icon, notification } from 'antd';
+const FormItem = Form.Item;
 
-const Login = () => {
-    const [id, setId] = useState('');
-    const [PN, setPN] = useState('');
-    const [PNCheck, setPNCheck] = useState('');
-    const [PNError, setPNError] = useState(false);
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        if (PN !== PNCheck) {
-            return setPNError(true);
-        }
-    };
-    const onChangeId = (e) => {
-        setId(e.target.value);
-    };
-
-    const onChangePN = (e) => {
-        setPN(e.target.value);
-    };
-    const onChangePNCheck = (e) => {
-        setPNError(e.target.value !== PN);
-        setPNCheck(e.target.value);
-    };
-
+class Login extends Component {
+  render() {
+    const AntWrappedLoginForm = Form.create()(LoginForm);
     return (
-            <Form onSubmit={onSubmit} style={{textAlign:"center",marginTop:"30px",marginLeft:-60,padding: 10}}>
-                <div style={{margin:"10px"}}>
-                    <label htmlFor="user-id" >아이디</label>
-                    <br/>
-                    <Input name="user-id" value={id} required onChange={onChangeId} style={{width: 200}}/>
-                </div>
-
-                <div style={{margin:"10px"}}>
-                    <label htmlFor="user-pn">휴대폰번호</label>
-                    <br/>
-                    <Input name="user-pn" value={PN} required onChange={onChangePN}
-                           style={{width: 200}}/>
-                </div>
-                <div style={{margin:"10px"}}>
-                    <label htmlFor="user-PN-chk">휴대폰번호 체크</label>
-                    <br/>
-                    <Input name="user-PN-chk" value={PNCheck} required
-                           onChange={onChangePNCheck} style={{width: 200}}/>
-                </div>
-                <div>
-
-                    {PNError && <div style={{color: 'red'}}>휴대폰번호가 일치하지 않습니다</div>}
-                </div>
-                <div style={{margin:"10px"}}>
-                    <Button type="primary" htmlType="submit">로그인!</Button>
-                </div>
-            </Form>
-
+      <div className="login-container">
+        <h1 className="page-title" style={{marginLeft:"40%"}}>Login</h1>
+        <div className="login-content">
+          <AntWrappedLoginForm onLogin={this.props.onLogin} />
+        </div>
+      </div>
     );
-};
+  }
+}
+
+class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        const loginRequest = Object.assign({}, values);
+        login(loginRequest)
+          .then(response => {
+            localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+            this.props.onLogin();
+          })
+          .catch(error => {
+            if (error.status === 401) {
+              notification.error({
+                message: 'Polling App',
+                description:
+                  'Your Username or Password is incorrect. Please try again!',
+              });
+            } else {
+              notification.error({
+                message: 'Polling App',
+                description:
+                  error.message ||
+                  'Sorry! Something went wrong. Please try again!',
+              });
+            }
+          });
+      }
+    });
+  }
+
+  render() {
+    const { getFieldDecorator } = this.props.form;
+    return (
+      <Form onSubmit={this.handleSubmit} className="login-form" style={{marginLeft:"40%" , marginRight:"40%"}}>
+        <FormItem>
+          {getFieldDecorator('userNameOrEmail', {
+            rules: [
+              {
+                required: true,
+                message: 'Please input your username or email!',
+              },
+            ],
+          })(
+            <Input
+              prefix={<Icon type="user" />}
+              size="large"
+              name="userNameOrEmail"
+              placeholder="Username or Email"
+            />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input
+              prefix={<Icon type="lock" />}
+              size="large"
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+          )}
+        </FormItem>
+        <FormItem>
+          <Button
+            type="primary"
+            htmlType="submit"
+            size="large"
+            className="login-form-button">
+            Login
+          </Button>
+          Or <Link to="/signup">register now!</Link>
+        </FormItem>
+      </Form>
+    );
+  }
+}
+
 export default Login;
