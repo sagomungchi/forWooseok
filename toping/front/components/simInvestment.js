@@ -51,6 +51,7 @@ class SimInvestment extends React.Component {
         });
     };
 
+    
     render() {
         return (
             <>
