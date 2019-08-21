@@ -47,7 +47,7 @@ const Navigator = ({ children }) => {
                     <Link href="list" ><div>List</div></Link>
                 </Col>
                 <Col xs={4} md={4}>
-                    <Link href="addIdea"><div>Register</div></Link>
+                    <Link href="addIdea"><div>Flatform</div></Link>
                 </Col>
                 <Col xs={8} md={8} style={{ marginTop: "-15px", fontSize: "40px" }}>
                     <Link href="index" ><a><img style={imgStyle} src="static/toping.png"/></a></Link>
