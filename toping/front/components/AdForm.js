@@ -19,16 +19,9 @@ const AdForm = () => {
         <Carousel class autoplay>
             <div>
                 <Col xs={24} md={24}>
-                    <img style={AdFormStyle} src="static/adone.png" />
-                </Col>
-            </div>
-            <div>
-
-                <Col xs={24} md={24}>
                     <img style={AdFormStyle} src="static/adq.png" />
                 </Col>
             </div>
-
             <div>
                 <Col xs={24} md={24}>
                     <img style={AdFormStyle} src="static/adqq.png" />
@@ -46,7 +39,11 @@ const AdForm = () => {
                     <img style={AdFormStyle} src="static/adqqqq.png" />
                 </Col>
             </div>
-
+            <div>
+                <Col xs={24} md={24}>
+                    <img style={AdFormStyle} src="static/adone.png" />
+                </Col>
+            </div>
             <div>
                 <Col xs={24} md={24}>
                     <img style={AdFormStyle} src="static/adqqqqq.png" />

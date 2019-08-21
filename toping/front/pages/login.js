@@ -35,19 +35,19 @@ const Login = () => {
 
     return (
             <Form onSubmit={onSubmit} style={{textAlign:"center",marginTop:"30px",marginLeft:-60,padding: 10}}>
-                <div>
+                <div style={{margin:"10px"}}>
                     <label htmlFor="user-id" >아이디</label>
                     <br/>
                     <Input name="user-id" value={id} required onChange={onChangeId} style={{width: 200}}/>
                 </div>
 
-                <div>
+                <div style={{margin:"10px"}}>
                     <label htmlFor="user-pn">휴대폰번호</label>
                     <br/>
                     <Input name="user-pn" value={PN} required onChange={onChangePN}
                            style={{width: 200}}/>
                 </div>
-                <div>
+                <div style={{margin:"10px"}}>
                     <label htmlFor="user-PN-chk">휴대폰번호 체크</label>
                     <br/>
                     <Input name="user-PN-chk" value={PNCheck} required
@@ -57,7 +57,7 @@ const Login = () => {
 
                     {PNError && <div style={{color: 'red'}}>휴대폰번호가 일치하지 않습니다</div>}
                 </div>
-                <div>
+                <div style={{margin:"10px"}}>
                     <Button type="primary" htmlType="submit">로그인!</Button>
                 </div>
             </Form>

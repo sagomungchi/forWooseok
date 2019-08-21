@@ -7,13 +7,13 @@ const Nav_loginfalse = () => {
         <>
             <Col xs={2} md={2} >
                 <Link href="login">
-                    <div>Login /</div>
+                    <div style={{textAlign:"right"}}>Login /</div>
                 </Link>
             </Col>
             <Col xs={2} md={2}  >
 
                 <Link href="join">
-                    <div style={{paddingRight:"30px"}}>Join<Icon type="user" /></div>
+                    <div style={{marginRight:"30px", textAlign:"left"}}>Join<Icon type="user" /></div>
                 </Link>
             </Col>
 
