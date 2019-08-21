@@ -12,7 +12,7 @@
 
 
 import axios from 'axios';
-import { Row, Col } from 'antd';
+import { Row, Col, Spin } from 'antd';
 import Link from 'next/link';
 import React from 'react';
 
@@ -38,38 +38,38 @@ class _List extends React.Component {
 
         const userList = this.state.posts.map(post => {
             console.log(post)
-            return(
-            <>
-            <div style={{ marginLeft:"20%", marginRight:"20%" }}>
-                <li key={post.id} style={{ listStyleType: "none" }}>
-                    <Row gutter={30}>
-                        <Col style={{ marginTop: 20, textAlign: "right" }} md={8}>
-                            <Link as={post.title} href={{
-                                pathname: '/Post',
-                                query: { postImg: post.img, postTitle: post.title, postText: post.text }
-                            }}>
-                                <img src={post.img} style={mainListStyle} />
-                            </Link>
-                        </Col>
-                        <Col style={{ marginTop: 20, textAlign: "left" }} md={16}>
-                            <Row>
-                                <h1>{post.title}</h1> - {post.team}
-                            </Row>
-                            <Row>
-                                {post.text}
-                            </Row>
-                            <Row>
-                                투자현황
+            return (
+                <>
+                    <div style={{ marginLeft: "20%", marginRight: "20%" }}>
+                        <li key={post.id} style={{ listStyleType: "none" }}>
+                            <Row gutter={30}>
+                                <Col style={{ marginTop: 20, textAlign: "right" }} md={8}>
+                                    <Link as={post.title} href={{
+                                        pathname: '/Post',
+                                        query: { postImg: post.img, postTitle: post.title, postText: post.text }
+                                    }}>
+                                        <img src={post.img} style={mainListStyle} />
+                                    </Link>
+                                </Col>
+                                <Col style={{ marginTop: 20, textAlign: "left" }} md={16}>
+                                    <Row>
+                                        <h1>{post.title}</h1> - {post.team}
+                                    </Row>
+                                    <Row>
+                                        {post.text}
+                                    </Row>
+                                    <Row>
+                                        투자현황
                                 <br />
-                                <h2>{formatNum(post.earnMoney)}/{formatNum(post.needMoney)}</h2><h4
-                                    style={{}}>({(post.earnMoney / post.needMoney * 100).toFixed(1)}%)</h4>
-                                <h1>{post.track}</h1>
+                                        <h2>{formatNum(post.earnMoney)}/{formatNum(post.needMoney)}</h2><h4
+                                            style={{}}>({(post.earnMoney / post.needMoney * 100).toFixed(1)}%)</h4>
+                                        <h1>{post.track}</h1>
+                                    </Row>
+                                </Col>
                             </Row>
-                        </Col>
-                    </Row>
-                </li>
-             </div>
-            </>
+                        </li>
+                    </div>
+                </>
             )
         })
 
@@ -95,7 +95,7 @@ class _List extends React.Component {
     render() {
         return (
             <>
-             {this.state.posts ? this._renderPosts() : 'Loding'}
+                {this.state.posts ? this._renderPosts() :  <Spin style={{margin:"0px auto"}} size="large" />}
             </>
         );
     }

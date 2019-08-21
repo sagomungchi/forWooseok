@@ -10,9 +10,10 @@
 * */
 
 import axios from 'axios';
-import { Row, Col } from 'antd';
+import { Row, Col, Spin } from 'antd';
 import Link from 'next/link';
-import React from 'react';
+import React, { Children } from 'react';
+import SimInvestment from '../components/SimInvestment';
 
 const mainListStyle = {
     width: "300px",
@@ -35,39 +36,16 @@ class List extends React.Component {
             return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
         }
 
-        const userList = this.state.posts.map(
-
-            post =>
-                <div style={{ marginLeft:"20%", marginRight:"20%" }}>
-                    <li key={post.id} style={{ listStyleType: "none" }}>
-
-                        <Row gutter={30}>
-                            <Col style={{ marginTop: 20, textAlign: "right" }} md={8}>
-                                <Link as={post.title} href={{
-                                    pathname: '/EventPost',
-                                    query: { postImg: post.img, postTitle: post.title, postText: post.text }
-                                }}>
-                                    <img src={post.img} style={mainListStyle} />
-                                </Link>
-                            </Col>
-                            <Col style={{ marginTop: 20, textAlign: "left" }} md={16}>
-                                <Row>
-                                    <h1>{post.title}</h1> - {post.team}
-                                </Row>
-                                <Row>
-                                    {post.text}
-                                </Row>
-                                <Row>
-                                    투자현황
-                                <br />
-                                    <h2>{formatNum(post.earnMoney)}</h2>
-
-                                </Row>
-                            </Col>
-                        </Row>
-                    </li>
-                </div>
-        )
+        const userList = this.state.posts.map(post => {
+            console.log(post)
+            return (
+                <>
+                    <div style={{ marginLeft: "20%", marginRight: "20%" }}>
+                        <Col span={8} style={{ marginBottom: '30px' }}><SimInvestment _title={post.title} _id={post.id} _img={post.img} _team={post.team} _text={post.text} /></Col>
+                    </div>
+                </>
+            )
+        })
         return userList
     }
 
@@ -88,11 +66,10 @@ class List extends React.Component {
 
 
     render() {
-
         return (
             <>
                 <>
-                    {this.state.posts ? this._renderPosts() : 'Loding'}
+                    {this.state.posts ? this._renderPosts() : <Spin size="large" />}
                 </>
             </>
         );

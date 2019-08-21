@@ -14,7 +14,7 @@ const Rank = () => {
                 <Col span={8}> 
                  <Card
                     hoverable
-                    style={{ width: 240, margin:"0 auto" }}
+                    style={{ width: 300, margin:"0 auto" }}
                     cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
                 >
                     <Meta title="Europe Street beat" description="투자금액 : 5,000,000원" />
@@ -24,7 +24,7 @@ const Rank = () => {
                 <Col span={8}> 
                  <Card
                     hoverable
-                    style={{ width: 240,  margin:"0 auto" }}
+                    style={{ width: 300,  margin:"0 auto" }}
                     cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
                 >
                     <Meta title="Europe Street beat" description="투자금액 : 3,000,000원" />
@@ -34,7 +34,7 @@ const Rank = () => {
                 <Col span={8}>
                   <Card
                     hoverable
-                    style={{ width: 240,  margin:"0 auto" }}
+                    style={{ width: 300,  margin:"0 auto" }}
                     cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
                 >
                     <Meta title="Europe Street beat" description="투자금액 : 1,000,000원" />
